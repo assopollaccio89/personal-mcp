@@ -1,0 +1,14 @@
+services:
+  wallet-mcp:
+    build: .
+    container_name: wallet-mcp
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - WALLET_API_TOKEN=${WALLET_API_TOKEN}
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
