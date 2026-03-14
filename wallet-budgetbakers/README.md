@@ -42,30 +42,21 @@ Claude Code ──HTTP──> MCP Server (porta 3000) ──HTTPS──> BudgetB
 
 ### Opzione A: Docker su NAS (Consigliata)
 
-1. Clona il repository sul tuo NAS (es. via SSH o QNAP Terminal):
+Questo server è parte del monorepo [`assopollaccio89/personal-mcp`](https://github.com/assopollaccio89/personal-mcp).
+Le immagini vengono pubblicate su GHCR dalla CI/CD del monorepo.
+
+1. Crea il file env sul NAS:
    ```bash
-   git clone https://github.com/assopollaccio89/wallet-budgetbakers-mcp.git
-   cd wallet-budgetbakers-mcp
+   # /share/Container/container-station-data/application/personal-mcp/wallet-budgetbakers.env
+   WALLET_API_TOKEN=il-tuo-token
    ```
 
-2. Crea il file `.env` a partire dall'example:
+2. Avvia con lo stack personal-mcp:
    ```bash
-   cp .env.example .env
-   # Modifica .env inserendo il tuo token generato da Wallet
+   docker compose -f /path/to/personal-mcp/docker-compose.yml up -d wallet-budgetbakers
    ```
 
-3. Build e avvio:
-   ```bash
-   docker compose up -d --build
-   ```
-
-4. Per futuri aggiornamenti, ti basterà fare la pull e riavviare il container:
-   ```bash
-   git pull origin main
-   docker compose up -d --build
-   ```
-
-5. Verifica:
+3. Verifica:
    ```bash
    curl http://localhost:3000/health
    # {"status":"ok","server":"wallet-budgetbakers-mcp"}
