@@ -1,0 +1,37 @@
+# personal-mcp — Local Development Override
+# Builds from local source, bridge networking, exposed ports.
+
+services:
+  weather-mcp:
+    build:
+      context: ./weather-mcp
+    network_mode: bridge
+    ports:
+      - "3001:3001"
+
+  health-mcp:
+    build:
+      context: ./health-mcp
+    network_mode: bridge
+    ports:
+      - "3002:3002"
+    environment:
+      - OPEN_WEARABLES_URL=http://host.docker.internal:8080
+
+  secretary-mcp:
+    build:
+      context: ./secretary-mcp
+    network_mode: bridge
+    ports:
+      - "3003:3003"
+    volumes:
+      - ./secretary-mcp/tokens:/app/tokens
+
+  nutrition-mcp:
+    build:
+      context: ./nutrition-mcp
+    network_mode: bridge
+    ports:
+      - "3004:3004"
+    volumes:
+      - ./nutrition-mcp/data:/app/data

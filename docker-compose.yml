@@ -1,0 +1,35 @@
+# personal-mcp — Production Compose (NAS)
+# Pulls pre-built images from GHCR. Use network_mode: host for NAS inter-service communication.
+
+services:
+  weather-mcp:
+    image: ghcr.io/assopollaccio89/personal-mcp-weather:main
+    container_name: weather-mcp
+    restart: always
+    network_mode: host
+
+  health-mcp:
+    image: ghcr.io/assopollaccio89/personal-mcp-health:main
+    container_name: health-mcp
+    restart: always
+    network_mode: host
+    environment:
+      - OPEN_WEARABLES_URL=http://localhost:8080
+
+  secretary-mcp:
+    image: ghcr.io/assopollaccio89/personal-mcp-secretary:main
+    container_name: secretary-mcp
+    restart: always
+    network_mode: host
+    env_file:
+      - /share/Container/container-station-data/application/personal-mcp/secretary-mcp.env
+    volumes:
+      - /share/Container/container-station-data/application/personal-mcp/secretary-tokens:/app/tokens
+
+  nutrition-mcp:
+    image: ghcr.io/assopollaccio89/personal-mcp-nutrition:main
+    container_name: nutrition-mcp
+    restart: always
+    network_mode: host
+    volumes:
+      - /share/Container/container-station-data/application/personal-mcp/nutrition-data:/app/data

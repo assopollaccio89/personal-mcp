@@ -1,0 +1,24 @@
+{
+  "name": "nutrition-mcp",
+  "version": "1.0.0",
+  "description": "Nutrition & Performance Fueling MCP Server for Agente-Smith",
+  "type": "module",
+  "bin": {
+    "nutrition-mcp": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.1",
+    "better-sqlite3": "^11.3.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.11",
+    "@types/node": "^22.5.4",
+    "typescript": "^5.5.4"
+  }
+}
