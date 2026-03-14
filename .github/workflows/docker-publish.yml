@@ -18,7 +18,7 @@ jobs:
 
     strategy:
       matrix:
-        service: [weather-mcp, health-mcp, secretary-mcp, nutrition-mcp]
+        service: [weather-mcp, health-mcp, secretary-mcp, nutrition-mcp, wallet-budgetbakers]
 
     steps:
       - name: Checkout repository

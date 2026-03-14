@@ -33,3 +33,11 @@ services:
     network_mode: host
     volumes:
       - /share/Container/container-station-data/application/personal-mcp/nutrition-data:/app/data
+
+  wallet-budgetbakers:
+    image: ghcr.io/assopollaccio89/personal-mcp-wallet-budgetbakers:main
+    container_name: wallet-mcp
+    restart: always
+    network_mode: host
+    env_file:
+      - /share/Container/container-station-data/application/personal-mcp/wallet-budgetbakers.env
